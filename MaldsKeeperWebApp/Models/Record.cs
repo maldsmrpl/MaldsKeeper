@@ -11,7 +11,7 @@ namespace MaldsKeeperWebApp.Models
         public string? Login { get; set; }
         public string? Password { get; set; }
         public string? Description { get; set; }
-        public DateTime? AddedTime { get; set; }
+        public DateTime AddedTime { get; set; }
         public DateTime? EditedTime { get; set; }
         [ForeignKey("AppUser")]
         public string AppUserId { get; set; }
