@@ -1,0 +1,30 @@
+﻿@using MaldsKeeperWebApp.ViewModels
+@model IEnumerable<IndexRecordViewModel>
+
+<h1>Record View</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Login</th>
+            <th>Password</th>
+            <th>Description</th>
+            <th>Added Time</th>
+            <th>Edited Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Login)</td>
+                <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.AddedTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.EditedTime)</td>
+            </tr>
+        }
+    </tbody>
+</table>
