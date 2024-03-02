@@ -132,5 +132,26 @@ namespace MaldsKeeperWebApp.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var recordDetails = await _recordRepository.GetRecordByIdAsync(id);
+            if (recordDetails == null) return View("Error");
+            return View(recordDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteRecord(int id)
+        {
+            var recordDetails = await _recordRepository.GetRecordByIdAsync(id);
+
+            if (recordDetails == null)
+            {
+                return View("Error");
+            }
+
+            _recordRepository.Delete(recordDetails);
+            return RedirectToAction("Index");
+        }
     }
 }
