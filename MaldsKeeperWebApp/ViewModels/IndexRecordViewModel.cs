@@ -5,6 +5,7 @@ namespace MaldsKeeperWebApp.ViewModels
 {
     public class IndexRecordViewModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string? Login { get; set; }
         public string? Password { get; set; }

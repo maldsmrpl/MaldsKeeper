@@ -40,6 +40,14 @@ namespace MaldsKeeperWebApp.Repository
         {
             return await _context.Records.Where(u => u.AppUserId.Equals(appUserId)).ToListAsync();
         }
+        public async Task<Record> GetRecordByIdAsync(int recordId)
+        {
+            return await _context.Records.AsNoTracking().Where(i => i.Id.Equals(recordId)).FirstOrDefaultAsync();
+        }
+        public Record GetRecordById(int recordId)
+        {
+            return _context.Records.AsNoTracking().Where(i => i.Id.Equals(recordId)).FirstOrDefault();
+        }
         public async Task<IEnumerable<Card>> GetCardsByUserIdAsync(string appUserId)
         {
             return await _context.Cards.Where(u => u.AppUserId.Equals(appUserId)).ToListAsync();

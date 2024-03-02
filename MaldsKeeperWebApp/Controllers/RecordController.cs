@@ -2,12 +2,15 @@
 using MaldsKeeperWebApp.Models;
 using MaldsKeeperWebApp.Repository;
 using MaldsKeeperWebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace MaldsKeeperWebApp.Controllers
 {
+    
     public class RecordController : Controller
     {
         private readonly IRecordRepository _recordRepository;
@@ -28,6 +31,7 @@ namespace MaldsKeeperWebApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
             var currentUserRecords = await _recordRepository.GetRecordsByUserIdAsync(
                 _userRepository.GetUserIdByEmail(_userRepository.GetCurrentUserEmail()));
 
@@ -36,6 +40,7 @@ namespace MaldsKeeperWebApp.Controllers
             {
                 recordsVM.Add(new IndexRecordViewModel()
                 {
+                    Id = record.Id,
                     Title = record.Title,
                     Login = record.Login,
                     Password = record.Password,
@@ -78,6 +83,54 @@ namespace MaldsKeeperWebApp.Controllers
                 return RedirectToAction("Index");
             }
             return View(recordVM);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var record = await _recordRepository.GetRecordByIdAsync(id);
+            if (record == null) return NotFound();
+
+            var editVM = new EditRecordViewModel
+            {
+                Id = id,
+                Title = record.Title,
+                Login = record.Login,
+                Password = record.Password,
+                Description = record.Description
+            };
+            return View(editVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditRecordViewModel recordVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit club");
+                return View("Edit", recordVM);
+            }
+
+            var userRecord = await _recordRepository.GetRecordByIdAsync(id);
+
+            if (userRecord == null)
+            {
+                return View("Error");
+            }
+
+            var record = new Record
+            {
+                AppUserId = userRecord.AppUserId,
+                AddedTime = userRecord.AddedTime,
+                Id = id,
+                Title = recordVM.Title,
+                Login = recordVM.Login,
+                Password = recordVM.Password,
+                Description = recordVM.Description,
+                EditedTime = DateTime.Now,
+            };
+
+            _recordRepository.Edit(record);
+
+            return RedirectToAction("Index");
         }
     }
 }
