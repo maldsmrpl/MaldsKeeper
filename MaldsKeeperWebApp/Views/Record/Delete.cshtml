@@ -36,14 +36,13 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Delete" class="btn btn-primary" />
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a asp-action="Index" type="button" class="btn btn-secondary" control-id="ControlID-106">Back to List</a>
+                    <input type="submit" value="Delete" class="btn btn-outline-danger" control-id="ControlID-105"></input>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,13 +1,16 @@
 ﻿@using MaldsKeeperWebApp.ViewModels
 @model IEnumerable<IndexRecordViewModel>
 
-<h1>Record View</h1>
-
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Records</li>
+</ol>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" type="button" class="btn btn-primary" control-id="ControlID-47">Create New</a>
 </p>
-
-<table class="table-hover table-light">
+<br />
+<table class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Title</th>
@@ -29,8 +32,10 @@
                 <td>@Html.DisplayFor(modelItem => item.AddedTime)</td>
                 <td>@Html.DisplayFor(modelItem => item.EditedTime)</td>
                 <td>
-                    <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Record" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Record" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a type="button" class="btn btn-secondary btn-sm" control-id="ControlID-105" asp-controller="Record" asp-action="Edit" asp-route-id="@item.Id"> Edit </a>
+                        <a type="button" class="btn btn-outline-danger btn-sm" control-id="ControlID-106" asp-controller="Record" asp-action="Delete" asp-route-id="@item.Id">X</a>
+                    </div>
                 </td>
             </tr>
         }

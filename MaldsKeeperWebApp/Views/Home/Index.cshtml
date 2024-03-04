@@ -1,18 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">Home</li>
+</ol>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<li>
-    User.Identity.IsAuthenticated = @User.Identity.IsAuthenticated
-</li>
-<li>
-    User.Identity.Name = @User.Identity.Name
-</li>
-<li>
-    User.Identity.AuthenticationType = @User.Identity.AuthenticationType;
-</li>
+<table class="table table-hover">
+    <tr>
+        <th scope="col">Property</th>
+        <th scope="col">Value</th>
+    </tr>
+    <tr>
+        <td scope="row">User.Identity.IsAuthenticated</td>
+        <td>@User.Identity.IsAuthenticated</td>
+    </tr>
+    <tr>
+        <td scope="row">User.Identity.Name</td>
+        <td>@User.Identity.Name</td>
+    </tr>
+    <tr>
+        <td scope="row">User.Identity.AuthenticationType</td>
+        <td>@User.Identity.AuthenticationType</td>
+    </tr>
+</table>

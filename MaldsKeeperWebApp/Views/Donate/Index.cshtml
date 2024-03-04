@@ -1,12 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@{
+﻿@{
     ViewBag.Title = "Buy an Invisible Book";
 }
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Donate</li>
+</ol>
 
 <style>
     .align-items-center {
@@ -16,7 +14,8 @@
     }
 </style>
 
-<form asp-action="ProcessDonation" method="post">
+<form id="donationForm" asp-action="ProcessDonation" method="post">
+    <br />
     <div class="card text-white bg-info mb-3" style="max-width: 20;">
         <div class="card-header">Buy an Invisible Book</div>
         <div class="card-body">
@@ -24,49 +23,30 @@
                 <p class="align-items-center">
                     <img src="~/img/book.webp" alt="Invisible Book" style="width:300px;height:300px;" />
                 </p>
-                <p>Experience the power of imagination with our latest collection of Invisible Books. Perfect for those who love to read ... between the lines.</p>
+                <p>Dive into a world where the boundaries of reality and fiction blur, inviting you to create your own stories, characters, and adventures. Our Invisible Books are meticulously crafted for readers seeking an unparalleled journey into the depths of their own creativity. Whether you're a dreamer, a thinker, or simply a lover of the unexplored, these books are your canvas, waiting for you to paint the tales that reside in the quietest corners of your imagination. Embrace the freedom to interpret, to imagine, and to discover the infinite possibilities that lie within the pages you can't see but can certainly feel. Perfect for gifting to the visionary in your life, or keeping as a unique treasure that reminds you of the endless potential of the mind.</p>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" required type="email" value="@User.Identity.Name"
-                           placeholder="Your email" aria-label="Your email" aria-describedby="button-addon2" control-id="ControlID-42">
+                    <input type="email" class="form-control" required placeholder="Your email" aria-label="Your email" name="email" value="@User.Identity.Name">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">PLN</span>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" step="1" min="5" required control-id="ControlID-41">
+                    <input type="number" class="form-control" id="amount" name="amount" aria-label="Amount (to the nearest dollar)" step="1" min="5" required>
                     <span class="input-group-text">.00</span>
-                    <button class="btn btn-primary" type="button" id="button-addon2" control-id="ControlID-43">Button</button>
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Buy!</button>
                 </div>
+
             </h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">Experience the power of imagination with our latest collection of Invisible Books. Perfect for those who love to read ... between the lines.</p>
         </div>
     </div>
-    <table>
-        <tr>
-            <td>
-                <img src="~/img/book.webp" alt="Invisible Book" style="width:300px;height:300px;" />
-            </td>
-            <td>
-                <div>
-                    <p>Experience the power of imagination with our latest collection of Invisible Books. Perfect for those who love to read ... between the lines.</p>
-                </div>
-                <div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required type="email" value="@User.Identity.Name"
-                               placeholder="Your email" aria-label="Your email" aria-describedby="button-addon2" control-id="ControlID-42">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">PLN</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" step="1" min="5" required control-id="ControlID-41">
-                        <span class="input-group-text">.00</span>
-                        <button class="btn btn-primary" type="button" id="button-addon2" control-id="ControlID-43">Button</button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-
-    @*     <label for="email">Your Email:</label>
-    <input id="email" placeholder="email" value="@User.Identity.Name" name="email" type="email" required />
-    <label for="amount">Amount (in cents):</label>
-    <input id="amount" name="amount" value="1000" type="number" min="500" step="1" required />
-    <button type="submit">Donate Now</button> *@
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var form = document.getElementById('donationForm');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                var amountInput = document.getElementById('amount');
+                amountInput.value = parseInt(amountInput.value) * 100;
+                form.submit();
+            });
+        });
+    </script>
 </form>

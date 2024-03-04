@@ -46,8 +46,8 @@ namespace MaldsKeeperWebApp.Controllers
                 },
             },
                 Mode = "payment",
-                SuccessUrl = "https://localhost:7182/donate/success",
-                CancelUrl = "https://localhost:7182/donate/cancel",
+                SuccessUrl = "https://localhost:7269/donate/success",
+                CancelUrl = "https://localhost:7269/donate/cancel",
                 CustomerEmail = email,
             };
 
