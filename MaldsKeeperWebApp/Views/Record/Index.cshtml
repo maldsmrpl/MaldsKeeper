@@ -23,8 +23,8 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                <td>@Html.DisplayFor(modelItem => item.Login)</td>
-                <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                <td class="copyable" data-copy-value="@item.Login">@Html.DisplayFor(modelItem => item.Login)</td>
+                <td class="copyable" data-copy-value="@item.Password">@Html.DisplayFor(modelItem => item.Password)</td>
                 <td>@Html.DisplayFor(modelItem => item.Description)</td>
                 <td>@Html.DisplayFor(modelItem => item.AddedTime)</td>
                 <td>@Html.DisplayFor(modelItem => item.EditedTime)</td>
@@ -36,3 +36,16 @@
         }
     </tbody>
 </table>
+
+<script>
+    document.querySelectorAll('.copyable').forEach(cell => {
+        cell.addEventListener('click', function () {
+            const textToCopy = this.getAttribute('data-copy-value');
+            navigator.clipboard.writeText(textToCopy).then(function () {
+                console.log('Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Could not copy text: ', err);
+            });
+        });
+    });
+</script>
