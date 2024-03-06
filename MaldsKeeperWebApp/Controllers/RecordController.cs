@@ -14,18 +14,15 @@ namespace MaldsKeeperWebApp.Controllers
     public class RecordController : Controller
     {
         private readonly IRecordRepository _recordRepository;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
         private readonly IUserRepository _userRepository;
 
         public RecordController(
             IRecordRepository recordRepository, 
-            IHttpContextAccessor httpContextAccessor, 
             UserManager<AppUser> userManager, 
             IUserRepository userRepository)
         {
             _recordRepository = recordRepository;
-            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _userRepository = userRepository;
         }
